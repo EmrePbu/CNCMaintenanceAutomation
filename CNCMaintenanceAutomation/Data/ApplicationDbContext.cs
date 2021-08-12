@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using CNCMaintenanceAutomation.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,8 @@ namespace CNCMaintenanceAutomation.Data
             : base(options)
         {
         }
+
+        public DbSet<MaintenanceType> MaintenanceTypes { get; set; }
     }
 }
+    
