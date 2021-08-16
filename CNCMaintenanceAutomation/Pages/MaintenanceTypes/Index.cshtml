@@ -5,4 +5,51 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1> Maintenance Types</h1>
+@*<h1> Maintenance Types</h1>*@
+
+<br />
+<br />
+<div class="container">
+    <div class="justify-content-center" style="border: solid 1px #9dd4cf; border-radius: 18px;">
+        <div class="row p-4">
+            <div class="col-6">
+                <h2 class="text-info">Maintenance Types</h2>
+            </div>
+            <div class="col-6 text-right">
+                <a asp-page="Create" class="btn btn-info">
+                    <i class="fas fa-plus"></i>
+                    &nbsp; New Maintenance Type
+                </a>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div>
+        @if (Model.MaintenanceType.Count == 0)
+        {
+            <p>Maintenance type not found. Please add maintenance type.</p>
+        }
+        else
+        {
+            <table class="table table-striped border">
+                <tr class="table-secondary">
+                    <th> @Html.DisplayNameFor(a => a.MaintenanceType[0].MaintenanceName)</th>
+                    <th> @Html.DisplayNameFor(a => a.MaintenanceType[0].MaintenancePrice)</th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model.MaintenanceType)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(a => item.MaintenanceName)
+                        </td>
+                        <td>
+                            @Html.DisplayNameFor(a => item.MaintenancePrice)
+                        </td>
+                        <td></td>
+                    </tr>
+                }
+            </table>
+        }
+    </div>
+</div>
