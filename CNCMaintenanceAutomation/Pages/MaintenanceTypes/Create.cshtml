@@ -1,0 +1,48 @@
+﻿@page
+@model CNCMaintenanceAutomation.Pages.MaintenanceTypes.CreateModel
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+@*<h1>Create</h1>*@
+
+<br />
+<h2 class="text-info">Create New Maintenance Type</h2>
+<br />
+<form action="/" method="post">
+    <div class="p-4 justify-content-center" style="border: solid 1px #9dd4cf; border-radius: 18px;">
+        @* Maintenance name input *@
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="MaintenanceType.MaintenanceName"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="MaintenanceType.MaintenanceName" class="form-control" />
+            </div>
+        </div>
+        @* Maintenance price input *@
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="MaintenanceType.MaintenancePrice"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="MaintenanceType.MaintenancePrice" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-5 offset-2">
+                <div class="row">
+                    <div class="col-6">
+                        <input type="submit" value="Create" class="btn btn-info form-control"/>
+                    </div>
+                    <div class="col-6">
+                        <a asp-page="Index" class="btn btn-success form-control">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
