@@ -37,14 +37,14 @@
                     <th> @Html.DisplayNameFor(a => a.MaintenanceType[0].MaintenancePrice)</th>
                     <th></th>
                 </tr>
-                @foreach (var item in Model.MaintenanceType)
+                @foreach (var maintenance in Model.MaintenanceType)
                 {
                     <tr>
                         <td>
-                            @Html.DisplayNameFor(a => item.MaintenanceName)
+                            @Html.DisplayFor(a => maintenance.MaintenanceName)
                         </td>
                         <td>
-                            @Html.DisplayNameFor(a => item.MaintenancePrice)
+                            @Html.DisplayFor(a => maintenance.MaintenancePrice)
                         </td>
                         <td></td>
                     </tr>

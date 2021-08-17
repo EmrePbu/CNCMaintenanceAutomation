@@ -10,6 +10,9 @@ namespace CNCMaintenanceAutomation.Models
     {
         public int Id { get; set; }
 
+        //  [Required(ErrorMessage = "Maintenance Type not null")]
+
+
         [Required]
         public string MaintenanceName { get; set; }
         [Required]
