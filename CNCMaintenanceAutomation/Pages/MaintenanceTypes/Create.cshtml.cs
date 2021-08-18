@@ -13,6 +13,7 @@ namespace CNCMaintenanceAutomation.Pages.MaintenanceTypes
     {
         private readonly ApplicationDbContext _applicationDbcontext;
 
+        [BindProperty]
         public MaintenanceType MaintenanceType { get; set; }
 
         public CreateModel(ApplicationDbContext applicationDbContext)
@@ -25,7 +26,7 @@ namespace CNCMaintenanceAutomation.Pages.MaintenanceTypes
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(MaintenanceType MaintenanceType)
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {

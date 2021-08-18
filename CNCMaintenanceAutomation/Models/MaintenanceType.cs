@@ -9,13 +9,12 @@ namespace CNCMaintenanceAutomation.Models
     public class MaintenanceType
     {
         public int Id { get; set; }
-
-        //  [Required(ErrorMessage = "Maintenance Type not null")]
-
-
-        [Required]
+        
+        // Server side validation 
+        [Required(ErrorMessage = "Maintenance Name not null")]
         public string MaintenanceName { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Maintenance Type not null")]
         public double MaintenancePrice { get; set; }
     }
 }

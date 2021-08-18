@@ -33,8 +33,13 @@
         {
             <table class="table table-striped border">
                 <tr class="table-secondary">
-                    <th> @Html.DisplayNameFor(a => a.MaintenanceType[0].MaintenanceName)</th>
-                    <th> @Html.DisplayNameFor(a => a.MaintenanceType[0].MaintenancePrice)</th>
+                    <th>
+                        @*Maintenance Name*@
+                        @Html.DisplayNameFor(a => a.MaintenanceType[0].MaintenanceName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(a => a.MaintenanceType[0].MaintenancePrice)
+                    </th>
                     <th></th>
                 </tr>
                 @foreach (var maintenance in Model.MaintenanceType)
