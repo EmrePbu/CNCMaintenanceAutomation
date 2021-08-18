@@ -11,14 +11,14 @@ namespace CNCMaintenanceAutomation.Pages.MaintenanceTypes
 {
     public class CreateModel : PageModel
     {
-        private readonly ApplicationDbContext _applicationDbcontext;
+        private readonly ApplicationDbContext _context;
 
         [BindProperty]
         public MaintenanceType MaintenanceType { get; set; }
 
-        public CreateModel(ApplicationDbContext applicationDbContext)
+        public CreateModel(ApplicationDbContext context)
         {
-            _applicationDbcontext = applicationDbContext;
+            _context = context;
         }
 
         public IActionResult OnGet()
@@ -34,8 +34,8 @@ namespace CNCMaintenanceAutomation.Pages.MaintenanceTypes
             }
 
             // Adding data to database
-            _applicationDbcontext.MaintenanceTypes.Add(MaintenanceType);
-            await _applicationDbcontext.SaveChangesAsync();
+            _context.MaintenanceTypes.Add(MaintenanceType);
+            await _context.SaveChangesAsync();
 
             return RedirectToPage("Index");
         }

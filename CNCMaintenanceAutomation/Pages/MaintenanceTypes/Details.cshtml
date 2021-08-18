@@ -1,0 +1,35 @@
+﻿@page
+@model CNCMaintenanceAutomation.Pages.MaintenanceTypes.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div>
+    <br />
+    <h2 class="text-info">Details Maintenance Type</h2>
+    <br />
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MaintenanceType.MaintenanceName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MaintenanceType.MaintenanceName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MaintenanceType.MaintenancePrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MaintenanceType.MaintenancePrice)
+        </dd>
+    </dl>
+</div>
+<div>
+    @*<a asp-page="./Edit" asp-route-id="@Model.MaintenanceType.Id">Edit</a> |
+        <a asp-page="./Index">Back to List</a>*@
+
+    <a asp-page="./Edit" asp-route-Id="@Model.MaintenanceType.Id" class="btn btn-info"><i class="fas fa-edit"></i>&nbsp;Edit</a>
+    <a asp-page="./Index" class="btn btn-success"><i class="fas fa-arrow-left"></i>&nbsp;Back to List</a>
+</div>
