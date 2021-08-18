@@ -35,15 +35,7 @@
         @* Accept button *@
         <div class="form-group row">
             <div class="col-5 offset-2">
-                <div class="row">
-                    <div class="col-6">
-                        @*<i class="fas fa-plus"></i>&nbsp;*@
-                        <input type="submit" value="Create" class="btn btn-info form-control" />
-                    </div>
-                    <div class="col-6">
-                        <a asp-page="Index" class="btn btn-success form-control"><i class="fas fa-arrow-left"></i>&nbsp; Back to List</a>
-                    </div>
-                </div>
+                <partial name="_CreateAndBackTobuttons" />
             </div>
         </div>
     </div>

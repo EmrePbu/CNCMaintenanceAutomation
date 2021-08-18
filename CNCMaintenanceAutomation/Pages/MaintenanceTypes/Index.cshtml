@@ -34,27 +34,39 @@
             <table class="table table-striped border">
                 <tr class="table-secondary">
                     <th>
+                        @Html.DisplayNameFor(a=> a.MaintenanceType[0].Id)
+                    </th>
+                    <th>
                         @*Maintenance Name*@
                         @Html.DisplayNameFor(a => a.MaintenanceType[0].MaintenanceName)
                     </th>
                     <th>
                         @Html.DisplayNameFor(a => a.MaintenanceType[0].MaintenancePrice)
                     </th>
-                    <th></th>
+                    <th>Transactions</th>
                 </tr>
                 @foreach (var maintenance in Model.MaintenanceType)
                 {
                     <tr>
+                        <td>
+                            @Html.DisplayFor(a => maintenance.Id)
+                        </td>
                         <td>
                             @Html.DisplayFor(a => maintenance.MaintenanceName)
                         </td>
                         <td>
                             @Html.DisplayFor(a => maintenance.MaintenancePrice)
                         </td>
-                        <td></td>
+                        <td style="width: 150px;">
+                            <div class="btn-group" role="group">
+                                <a class="btn btn-primary" asp-page="Edit" asp-route-Id="@maintenance.Id"><i class="far fa-edit"></i>&nbsp;Edit</a>
+                                <a class="btn btn-success" asp-page="Details" asp-route-Id="@maintenance.Id"><i class="far fa-info-circle"></i>&nbsp;Details</a>
+                                <a class="btn btn-danger" asp-page="Delete" asp-route-Id="@maintenance.Id"><i class="fas fa-trash-alt"></i>&nbsp;Delete</a>
+                            </div>
+                        </td>
                     </tr>
                 }
             </table>
-        }
+        }   
     </div>
 </div>
