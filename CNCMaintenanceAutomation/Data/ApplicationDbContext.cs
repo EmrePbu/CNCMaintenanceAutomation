@@ -13,8 +13,9 @@ namespace CNCMaintenanceAutomation.Data
             : base(options)
         {
         }
-
+        // Bu kisimda migration yapman gerek
         public DbSet<MaintenanceType> MaintenanceTypes { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }
     
