@@ -8,6 +8,10 @@ namespace CNCMaintenanceAutomation.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        /// <summary>
+        /// add-migration AddAplicationUser
+        /// update-database
+        /// </summary>
         public string NameLastName { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
