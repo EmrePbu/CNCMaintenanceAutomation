@@ -1,0 +1,57 @@
+﻿@page
+@model CNCMaintenanceAutomation.Pages.Users.IndexModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<form>
+    <div class="container">
+        <div class="justify-content-center" style="border: solid 1px #9dd4cf; border-radius: 18px;">
+            <div class="row p-4">
+                <div class="col-6">
+                    <h2 class="text-info">Users List</h2>
+                </div>
+                <div class="col-6 text-right">
+                    <a asp-page="/Account/Register" asp-area="Identity" class="btn btn-info">
+                        <i class="fas fa-plus"></i>
+                        &nbsp; New User
+                    </a>
+                </div>
+            </div>
+        </div>
+        <br />
+        <table class="table table-striped border">
+            <tr class="table-secondary">
+                <th>
+                    @Html.DisplayNameFor(model => model.ApplicationUsersList[0].NameLastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ApplicationUsersList[0].PhoneNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ApplicationUsersList[0].Email)
+                </th>
+            </tr>
+
+            @foreach (var item in Model.ApplicationUsersList)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => item.NameLastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Email)
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-page="Edit"><i class="far fa-edit"></i>&nbsp;Edit</a>
+                       <a class="btn btn-danger" asp-page="Delete"><i class="fas fa-trash-alt"></i>&nbsp;Delete</a>
+
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+    </div>
+</form>
