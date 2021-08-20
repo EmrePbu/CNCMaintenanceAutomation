@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using CNCMaintenanceAutomation.Data;
+using CNCMaintenanceAutomation.Models;
+using CNCMaintenanceAutomation.Utility;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -23,17 +26,21 @@ namespace CNCMaintenanceAutomation.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly ApplicationDbContext _context;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender, RoleManager<IdentityRole> roleManager, ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleManager = roleManager;
+            _context = context;
         }
 
         [BindProperty]
@@ -61,7 +68,6 @@ namespace CNCMaintenanceAutomation.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-
             [Required]
             [Display(Name = "Name and Last Name")]
             public string NameLastName { get; set; }
@@ -88,17 +94,40 @@ namespace CNCMaintenanceAutomation.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
-
+            
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                var user = new ApplicationUser 
+                { 
+                    UserName = Input.Email,
+                    Email = Input.Email,
+                    NameLastName = Input.NameLastName,
+                    Address = Input.Address,
+                    City = Input.City,
+                    ZipCode = Input.ZipCode,
+                    PhoneNumber = Input.PhoneNumber,
+                };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    if (!await _roleManager.RoleExistsAsync(StaticRoles.AdminUser))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(StaticRoles.AdminUser));
+                    }
+
+                    if (!await _roleManager.RoleExistsAsync(StaticRoles.CustomerUser))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(StaticRoles.CustomerUser));
+                    }
+
+                
+                 // CHECKPOINT: 
+                    await _userManager.AddToRoleAsync(user, StaticRoles.CustomerUser);
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
