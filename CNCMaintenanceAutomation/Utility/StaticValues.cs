@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 
 namespace CNCMaintenanceAutomation.Utility
 {
-    public static class StaticRoles
+    public static class StaticValues
     {
         public const string AdminUser = "Admin";
         public const string CustomerUser = "Customer";
+        public const int NumberOfItemsOnPage = 5;
     }
 }
+    

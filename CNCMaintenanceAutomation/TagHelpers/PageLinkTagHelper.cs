@@ -23,6 +23,7 @@ namespace CNCMaintenanceAutomation.TagHelpers
             urlHelperFactory = _urlHelperFactory;
         }
 
+
         [ViewContext]
         [HtmlAttributeNotBound]
         public ViewContext ViewContext { get; set; }
@@ -39,7 +40,9 @@ namespace CNCMaintenanceAutomation.TagHelpers
             IUrlHelper urlHelper = urlHelperFactory.GetUrlHelper(ViewContext);
             TagBuilder tagBuilder = new TagBuilder("div");
 
-            for (int i = 0; i < PageModel.TotalItems; i++)
+            // TotalItems yaparsan item sayisi kadar sayfa butonu olusturuyor.
+            // O yuzden TotalPage demen gerek.
+            for (int i = 1; i <= PageModel.TotalPage; i++)
             {
                 TagBuilder tag = new TagBuilder("a");
                 string url = PageModel.UrlParam.Replace(":", i.ToString());

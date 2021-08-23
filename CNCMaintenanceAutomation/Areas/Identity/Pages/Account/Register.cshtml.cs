@@ -114,19 +114,19 @@ namespace CNCMaintenanceAutomation.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    if (!await _roleManager.RoleExistsAsync(StaticRoles.AdminUser))
+                    if (!await _roleManager.RoleExistsAsync(StaticValues.AdminUser))
                     {
-                        await _roleManager.CreateAsync(new IdentityRole(StaticRoles.AdminUser));
+                        await _roleManager.CreateAsync(new IdentityRole(StaticValues.AdminUser));
                     }
 
-                    if (!await _roleManager.RoleExistsAsync(StaticRoles.CustomerUser))
+                    if (!await _roleManager.RoleExistsAsync(StaticValues.CustomerUser))
                     {
-                        await _roleManager.CreateAsync(new IdentityRole(StaticRoles.CustomerUser));
+                        await _roleManager.CreateAsync(new IdentityRole(StaticValues.CustomerUser));
                     }
 
                 
                  // CHECKPOINT: 
-                    await _userManager.AddToRoleAsync(user, StaticRoles.CustomerUser);
+                    await _userManager.AddToRoleAsync(user, StaticValues.CustomerUser);
 
                     _logger.LogInformation("User created a new account with password.");
 
