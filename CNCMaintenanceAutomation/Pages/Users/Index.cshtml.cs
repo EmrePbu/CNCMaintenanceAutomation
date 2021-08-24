@@ -28,7 +28,11 @@ namespace CNCMaintenanceAutomation.Pages.Users
         //[BindProperty]
         //public List<ApplicationUser> ApplicationUsersList { get; set; }
 
-        public async Task<IActionResult> OnGet(int productPage = 1)
+        public async Task<IActionResult> OnGet(
+            int productPage = 1,
+            string searchNameLastName = null,
+            string searchEmail = null,
+            string searchPhoneNumber = null)
         {
             //ApplicationUsersList = await _context.ApplicationUsers.ToListAsync();
             UsersListViewModel = new UsersListViewModel()
@@ -37,8 +41,54 @@ namespace CNCMaintenanceAutomation.Pages.Users
             };
 
             StringBuilder param = new StringBuilder();
-            // Checkpoint : dikkat
+            // Search with param
             param.Append("/Users?productPage=:");
+            param.Append("&searchNameLastName=");
+            if (searchNameLastName!=null)
+            {
+                param.Append(searchNameLastName);
+            }
+            param.Append("&searchEmail=");
+            if (searchEmail != null)
+            {
+                param.Append(searchEmail);
+            }
+            param.Append("&searchPhoneNumber=");
+            if (searchEmail != null)
+            {
+                param.Append(searchPhoneNumber);
+            }
+
+            if (searchNameLastName != null)
+            {
+                UsersListViewModel.ApplicationUsersList = await _context.ApplicationUsers.Where(
+                    a => a.NameLastName
+                    .ToLower()
+                    .Contains(searchNameLastName.ToLower()))
+                    .ToListAsync();
+            }
+            else
+            {
+                if (searchEmail != null)
+                {
+                    UsersListViewModel.ApplicationUsersList = await _context.ApplicationUsers.Where(
+                        a => a.Email
+                        .ToLower()
+                        .Contains(searchEmail.ToLower()))
+                        .ToListAsync();
+                }
+                else
+                {
+                    if (searchPhoneNumber != null)
+                    {
+                        UsersListViewModel.ApplicationUsersList = await _context.ApplicationUsers.Where(
+                       a => a.PhoneNumber
+                       .Contains(searchPhoneNumber))
+                       .ToListAsync();
+                    }
+                }
+            }
+
 
             var count = UsersListViewModel.ApplicationUsersList.Count;
 
