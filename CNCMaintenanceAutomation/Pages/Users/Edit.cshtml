@@ -8,16 +8,17 @@
 
 @*<h1 class="text-info pt-2 pb-3">@ViewData["Edit"]</h1>*@
 
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
+<form method="post">
+
+    <div class="row">
+        <div class="col-md-4">
             <h4>Edit Users</h4>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input asp-for="ApplicationUser.Id" hidden />
             <input asp-for="ApplicationUser.Email" hidden />
 
-            
+
 
             <div class="form-group">
                 <label asp-for="ApplicationUser.Email"></label>
@@ -60,17 +61,17 @@
                 <div class="row">
                     <div class="col-6">
                         @*<i class="fas fa-plus"></i>&nbsp;*@
-                        <input type="submit" value="Edit" class="btn btn-info form-control" />
+                        <input type="submit" value="Save" class="btn btn-info form-control" />
                     </div>
                     <div class="col-6">
                         <a asp-page="Index" class="btn btn-success form-control"><i class="fas fa-arrow-left"></i>&nbsp; Back to List</a>
                     </div>
                 </div>
             </div>
-
-        </form>
+        </div>
     </div>
-</div>
+
+</form>
 
 @section Scripts{
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }

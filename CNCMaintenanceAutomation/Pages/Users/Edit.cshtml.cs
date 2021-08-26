@@ -43,5 +43,35 @@ namespace CNCMaintenanceAutomation.Pages.Users
             
             return Page();
         }
+
+        
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+            else
+            {
+                var UserFromDb = await _context.ApplicationUsers.SingleOrDefaultAsync(a => a.Id == ApplicationUser.Id);
+                if (UserFromDb == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    UserFromDb.NameLastName = ApplicationUser.NameLastName;
+                    UserFromDb.Address = ApplicationUser.Address;
+                    UserFromDb.City = ApplicationUser.City;
+                    UserFromDb.ZipCode = ApplicationUser.ZipCode;
+                    UserFromDb.PhoneNumber = ApplicationUser.PhoneNumber;
+
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToPage("./Index");
+                }
+            }
+        }
+
     }
 }
