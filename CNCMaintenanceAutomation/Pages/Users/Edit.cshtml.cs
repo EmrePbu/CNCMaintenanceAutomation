@@ -4,12 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using CNCMaintenanceAutomation.Data;
 using CNCMaintenanceAutomation.Models;
+using CNCMaintenanceAutomation.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace CNCMaintenanceAutomation.Pages.Users
 {
+    [Authorize(Roles = StaticValues.AdminUser)]
     public class EditModel : PageModel
     {
         private readonly ApplicationDbContext _context;

@@ -7,12 +7,15 @@ using CNCMaintenanceAutomation.Data;
 using CNCMaintenanceAutomation.Models;
 using CNCMaintenanceAutomation.Models.ViewModel;
 using CNCMaintenanceAutomation.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace CNCMaintenanceAutomation.Pages.Users
 {
+
+    [Authorize(Roles = StaticValues.AdminUser)]
     public class IndexModel : PageModel
     {
         private readonly ApplicationDbContext _context; 

@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CNCMaintenanceAutomation.Data;
 using CNCMaintenanceAutomation.Models;
+using Microsoft.AspNetCore.Authorization;
+using CNCMaintenanceAutomation.Utility;
 
 namespace CNCMaintenanceAutomation.Pages.MaintenanceTypes
 {
+    [Authorize(Roles = StaticValues.AdminUser)]
     public class DeleteModel : PageModel
     {
         private readonly ApplicationDbContext _context;

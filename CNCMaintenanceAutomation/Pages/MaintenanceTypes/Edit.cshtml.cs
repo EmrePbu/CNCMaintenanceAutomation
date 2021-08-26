@@ -8,9 +8,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CNCMaintenanceAutomation.Data;
 using CNCMaintenanceAutomation.Models;
+using Microsoft.AspNetCore.Authorization;
+using CNCMaintenanceAutomation.Utility;
 
 namespace CNCMaintenanceAutomation.Pages.MaintenanceTypes
 {
+    [Authorize(Roles = StaticValues.AdminUser)]
     public class EditModel : PageModel
     {
         private readonly ApplicationDbContext _context;

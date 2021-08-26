@@ -6,9 +6,12 @@ using CNCMaintenanceAutomation.Models;
 using CNCMaintenanceAutomation.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Authorization;
+using CNCMaintenanceAutomation.Utility;
 
 namespace CNCMaintenanceAutomation.Pages.MaintenanceTypes
 {
+    [Authorize(Roles =StaticValues.AdminUser)]
     public class CreateModel : PageModel
     {
         private readonly ApplicationDbContext _context;
