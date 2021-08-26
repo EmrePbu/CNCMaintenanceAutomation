@@ -1,0 +1,77 @@
+﻿@page
+@model CNCMaintenanceAutomation.Pages.Users.EditModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+
+@*<h1 class="text-info pt-2 pb-3">@ViewData["Edit"]</h1>*@
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <h4>Edit Users</h4>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="ApplicationUser.Id" hidden />
+            <input asp-for="ApplicationUser.Email" hidden />
+
+            
+
+            <div class="form-group">
+                <label asp-for="ApplicationUser.Email"></label>
+                <input asp-for="ApplicationUser.Email" class="form-control" disabled />
+                <span asp-validation-for="ApplicationUser.Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ApplicationUser.NameLastName"></label>
+                <input asp-for="ApplicationUser.NameLastName" class="form-control" />
+                <span asp-validation-for="ApplicationUser.NameLastName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ApplicationUser.Address"></label>
+                <input asp-for="ApplicationUser.Address" class="form-control" />
+                <span asp-validation-for="ApplicationUser.Address" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ApplicationUser.City"></label>
+                <input asp-for="ApplicationUser.City" class="form-control" />
+                <span asp-validation-for="ApplicationUser.City" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ApplicationUser.ZipCode"></label>
+                <input asp-for="ApplicationUser.ZipCode" class="form-control" />
+                <span asp-validation-for="ApplicationUser.ZipCode" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ApplicationUser.PhoneNumber"></label>
+                <input asp-for="ApplicationUser.PhoneNumber" class="form-control" />
+                <span asp-validation-for="ApplicationUser.PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                @*<input type="submit" value="Save" class="btn btn-primary" />*@
+                <div class="row">
+                    <div class="col-6">
+                        @*<i class="fas fa-plus"></i>&nbsp;*@
+                        <input type="submit" value="Edit" class="btn btn-info form-control" />
+                    </div>
+                    <div class="col-6">
+                        <a asp-page="Index" class="btn btn-success form-control"><i class="fas fa-arrow-left"></i>&nbsp; Back to List</a>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

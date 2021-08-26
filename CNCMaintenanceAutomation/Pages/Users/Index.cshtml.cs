@@ -39,7 +39,7 @@ namespace CNCMaintenanceAutomation.Pages.Users
             {
                 ApplicationUsersList = await _context.ApplicationUsers.ToListAsync()
             };
-
+            
             StringBuilder param = new StringBuilder();
             // Search with param
             param.Append("/Users?productPage=:");
@@ -83,13 +83,13 @@ namespace CNCMaintenanceAutomation.Pages.Users
                     {
                         UsersListViewModel.ApplicationUsersList = await _context.ApplicationUsers.Where(
                        a => a.PhoneNumber
-                       .Contains(searchPhoneNumber))
+                       .ToLower()
+                       .Contains(searchPhoneNumber.ToLower()))
                        .ToListAsync();
                     }
                 }
             }
-
-
+            
             var count = UsersListViewModel.ApplicationUsersList.Count;
 
             UsersListViewModel.PagingInfo = new PagingInfo()

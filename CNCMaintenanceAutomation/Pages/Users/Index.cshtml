@@ -22,7 +22,7 @@
         </div>
         <br />
 
-        <div class="">
+        <div>
 
             <div style="height:60px;" class="container border">
                 <div class="row">
@@ -102,8 +102,8 @@
                         </td>
                         <td></td>
                         <td>
-                            <a class="btn btn-primary" asp-page="Edit"><i class="far fa-edit"></i>&nbsp;Edit</a>
-                            <a class="btn btn-danger" asp-page="Delete"><i class="fas fa-trash-alt"></i>&nbsp;Delete</a>
+                            <a class="btn btn-primary" asp-page="Edit" asp-route-Id="@item.Id"><i class="far fa-edit"></i>&nbsp;Edit</a>
+                            <a class="btn btn-danger" asp-page="Delete" asp-route-Id="@item.Id" ><i class="fas fa-trash-alt"></i>&nbsp;Delete</a>
 
                         </td>
 
