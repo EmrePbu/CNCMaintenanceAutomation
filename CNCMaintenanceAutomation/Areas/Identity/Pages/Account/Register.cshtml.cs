@@ -86,7 +86,8 @@ namespace CNCMaintenanceAutomation.Areas.Identity.Pages.Account
             [Display(Name = "Phone Number")]
             public string PhoneNumber { get; set; }
 
-
+            [Display(Name ="Is Admin ?")]
+            public bool IsAdmin { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -110,6 +111,7 @@ namespace CNCMaintenanceAutomation.Areas.Identity.Pages.Account
                     City = Input.City,
                     ZipCode = Input.ZipCode,
                     PhoneNumber = Input.PhoneNumber,
+                    
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
@@ -123,33 +125,52 @@ namespace CNCMaintenanceAutomation.Areas.Identity.Pages.Account
                     {
                         await _roleManager.CreateAsync(new IdentityRole(StaticValues.CustomerUser));
                     }
-
+                    
                 
-                 // CHECKPOINT: 
-                    await _userManager.AddToRoleAsync(user, StaticValues.CustomerUser);
-
-                    _logger.LogInformation("User created a new account with password.");
-
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
-
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    /// CHECKPOINT:
+                    if (Input.IsAdmin)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                        await _userManager.AddToRoleAsync(user, StaticValues.AdminUser);
+                        ///
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                        var callbackUrl = Url.Page(
+                            "/Account/ConfirmEmail",
+                            pageHandler: null,
+                            values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
+                            protocol: Request.Scheme);
+
+                        await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                            $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                        return RedirectToPage("/Users/Index");
                     }
                     else
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        await _userManager.AddToRoleAsync(user, StaticValues.CustomerUser);
+                        ///
+                        //await _signInManager.SignInAsync(user, isPersistent: false);
+                        if (User.IsInRole(StaticValues.AdminUser))
+                        {
+                            return RedirectToPage("/Users/Index");
+                        }
+                        else
+                        {
+                            return LocalRedirect(returnUrl);
+                        }
                     }
+
+                    _logger.LogInformation("User created a new account with password.");
+
+
+                    //if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    //{
+                    //    return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                    //}
+                    //else
+                    //{
+                    //    await _signInManager.SignInAsync(user, isPersistent: false);
+                    //    return LocalRedirect(returnUrl);
+                    //}
                 }
                 foreach (var error in result.Errors)
                 {
