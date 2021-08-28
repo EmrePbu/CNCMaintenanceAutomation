@@ -6,6 +6,9 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using CNCMaintenanceAutomation.Data;
+using CNCMaintenanceAutomation.Models;
+using CNCMaintenanceAutomation.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -23,8 +26,11 @@ namespace CNCMaintenanceAutomation.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger<ExternalLoginModel> _logger;
-
-        public ExternalLoginModel(
+        ///
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly ApplicationDbContext _context;
+        /*
+         public ExternalLoginModel(
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
             ILogger<ExternalLoginModel> logger,
@@ -34,6 +40,21 @@ namespace CNCMaintenanceAutomation.Areas.Identity.Pages.Account
             _userManager = userManager;
             _logger = logger;
             _emailSender = emailSender;
+        }*/
+        public ExternalLoginModel(
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager,
+            ILogger<ExternalLoginModel> logger,
+            IEmailSender emailSender,
+            RoleManager<IdentityRole> roleManager,
+            ApplicationDbContext context)
+        {
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _logger = logger;
+            _emailSender = emailSender;
+            _roleManager = roleManager;
+            _context = context;
         }
 
         [BindProperty]
@@ -50,7 +71,25 @@ namespace CNCMaintenanceAutomation.Areas.Identity.Pages.Account
         {
             [Required]
             [EmailAddress]
+            [Display(Name = "E Mail")]
             public string Email { get; set; }
+
+            [Required]
+            [Display(Name = "Name and Last Name")]
+            public string NameLastName { get; set; }
+
+            [Display(Name = "Address")]
+            public string Address { get; set; }
+
+            [Display(Name = "City")]
+            public string City { get; set; }
+
+            [Display(Name = "Zip Code")]
+            public string ZipCode { get; set; }
+
+            [Required]
+            [Display(Name = "Phone Number")]
+            public string PhoneNumber { get; set; }
         }
 
         public IActionResult OnGetAsync()
@@ -96,12 +135,16 @@ namespace CNCMaintenanceAutomation.Areas.Identity.Pages.Account
             {
                 // If the user does not have an account, then ask the user to create an account.
                 ReturnUrl = returnUrl;
+
+
                 ProviderDisplayName = info.ProviderDisplayName;
                 if (info.Principal.HasClaim(c => c.Type == ClaimTypes.Email))
                 {
                     Input = new InputModel
                     {
-                        Email = info.Principal.FindFirstValue(ClaimTypes.Email)
+                        Email = info.Principal.FindFirstValue(ClaimTypes.Email),
+                        NameLastName = info.Principal.FindFirstValue(ClaimTypes.Name)
+
                     };
                 }
                 return Page();
@@ -121,11 +164,23 @@ namespace CNCMaintenanceAutomation.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                ///
+                var user = new ApplicationUser
+                { 
+                    UserName = Input.Email,
+                    Email = Input.Email,
+                    NameLastName = Input.NameLastName,
+                    Address = Input.Address,
+                    City = Input.City,
+                    ZipCode = Input.ZipCode,
+                    PhoneNumber = Input.PhoneNumber,
+                    
+                };
 
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, StaticValues.CustomerUser);
                     result = await _userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)
                     {
