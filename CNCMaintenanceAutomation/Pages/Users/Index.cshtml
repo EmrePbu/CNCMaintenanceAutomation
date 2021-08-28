@@ -100,13 +100,18 @@
                         <td>
                             @Html.DisplayFor(model => item.Email)
                         </td>
-                        <td></td>
+                        <td>
+                            <a asp-page="../Machines/Index" asp-route-OwnerId="@item.Id" style="text-decoration: none;">
+                                <img src="~/images/logo_cnc_machine_480px.png" height="50" />
+                                Show Cnc Machine
+                            </a>
+                            
+                        </td>
                         <td>
                             <a class="btn btn-primary" asp-page="Edit" asp-route-Id="@item.Id"><i class="far fa-edit"></i>&nbsp;Edit</a>
                             <a class="btn btn-danger" asp-page="Delete" asp-route-Id="@item.Id" ><i class="fas fa-trash-alt"></i>&nbsp;Delete</a>
 
                         </td>
-
                     </tr>
                 }
 
