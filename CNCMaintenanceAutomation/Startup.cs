@@ -46,6 +46,13 @@ namespace CNCMaintenanceAutomation
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+
+            services.AddAuthentication().AddFacebook(fb =>
+            {
+                fb.AppId = "364835351849425";
+                fb.AppSecret = "e5cac426e5d440a7a8da6224888b7960";
+            });
+
             services.AddRazorPages().AddRazorRuntimeCompilation();
         }
 
