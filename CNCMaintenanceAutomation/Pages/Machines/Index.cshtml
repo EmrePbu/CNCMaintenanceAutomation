@@ -1,6 +1,167 @@
 ﻿@page
 @model CNCMaintenanceAutomation.Pages.Machines.IndexModel
+@using CNCMaintenanceAutomation.Utility
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
+<h2 class="text-info py-2">
+    Customer Machine Register
+</h2>
+
+<div class="container">
+    <div class="card">
+        @* bg-light text-dark  *@
+        <div class="card-header ml-0 row container">
+            <div class="col-6">
+                <i class="fas fa-cogs"></i>
+            </div>
+            <div class="col-6 text-right">
+                @if (User.IsInRole(StaticValues.AdminUser))
+                {
+                    <a asp-page="/Users/Index" class="btn btn-info btn-sm">List on Users</a>
+                }
+            </div>
+        </div>
+        
+        <div class="card-body">
+            <div class="row" style="padding: 20px 0 40px 0;">
+                <div class="col-md-3">
+                    <p>
+                        <a asp-page="Create" asp-route-userId="@Model.UserMachineViewModel.ApplicationUser.Id" class="btn btn-info form-control">
+                            <i class="fas fa-plus"></i>
+                            &nbsp; Add Machine
+                        </a>
+                    </p>
+                </div>
+                <div class="col-md-6 offset-md-3">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label asp-for="UserMachineViewModel.ApplicationUser.NameLastName"></label>
+                        </div>
+                        <div class="col-sm-8" style="padding-bottom:5px;">
+                            <input asp-for="UserMachineViewModel.ApplicationUser.NameLastName" disabled class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label asp-for="UserMachineViewModel.ApplicationUser.Email"></label>
+                        </div>
+                        <div class="col-sm-8" style="padding-bottom:5px;">
+                            <input asp-for="UserMachineViewModel.ApplicationUser.Email" disabled class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label asp-for="UserMachineViewModel.ApplicationUser.PhoneNumber"></label>
+                        </div>
+                        <div class="col-sm-8" style="padding-bottom:5px;">
+                            <input asp-for="UserMachineViewModel.ApplicationUser.PhoneNumber" disabled class="form-control" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            @if (Model.UserMachineViewModel.Machines.Count() == 0)
+            {
+                <p>
+                    Machine not found, please add machine.
+                </p>
+            }
+            else
+            {
+                <table class="table table-striped border">
+                    <tr class="table-secondary">
+                        <th>
+                            @Html.DisplayNameFor(a => a.UserMachineViewModel.Machines.FirstOrDefault().SerialNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(a => a.UserMachineViewModel.Machines.FirstOrDefault().Brand)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(a => a.UserMachineViewModel.Machines.FirstOrDefault().Model)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(a => a.UserMachineViewModel.Machines.FirstOrDefault().MachineType)
+                        </th>
+
+                        @if (User.IsInRole(StaticValues.AdminUser))
+                        {
+                            <th></th>
+                        }
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model.UserMachineViewModel.Machines)
+	                {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(a => item.SerialNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(a => item.Brand)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(a => item.Model)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(a => item.MachineType)
+                            </td>
+
+                            <td>
+                                <a class="btn btn-secondary" asp-page="../Maintenances/MaintenanceHistory" asp-route-Id="@item.Id">
+                                    <i class="fas fa-wrench"></i>
+                                    &nbsp;
+                                    Maintenance History
+                                </a>
+                            </td>
+
+                            @if (User.IsInRole(StaticValues.AdminUser))
+                            {
+                                <td>
+                                    <a class="btn btn-success" asp-page="../Maintenances/Create" asp-route-machineId="@item.Id">
+                                        <i class="fas fa-plus"></i>
+                                        &nbsp;
+                                        Create Maintenance
+                                    </a>
+                                </td>
+                            }
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a class="btn btn-primary" asp-page="Edit" asp-route-Id="@item.Id">
+                                        <i class="fas fa-edit"></i>
+                                        &nbsp;
+                                        Edit Maintenance
+                                    </a>
+                                    <a class="btn btn-danger" asp-page="Delete" asp-route-Id="@item.Id">
+                                        <i class="fas fa-trash-alt"></i>
+                                        &nbsp;
+                                        Delete Maintenance
+                                    </a>
+                                </div>
+                            </td>
+                            @*<td>
+                                <a class="btn btn-success" asp-page="../Maintenances/Edit" asp-route-machineId="@item.Id">
+                                    <i class="fas fa-edit"></i>
+                                    &nbsp;
+                                    Create Maintenance
+                                </a>
+                            </td>
+
+                            <td>
+                                <a class="btn btn-success" asp-page="../Maintenances/Delete" asp-route-machineId="@item.Id">
+                                    <i class="fas fa-trash"></i>
+                                    &nbsp;
+                                    Create Maintenance
+                                </a>
+                            </td>*@
+                        </tr>		 
+	                }
+                </table>
+            }
+        </div>
+    </div>
+</div>
