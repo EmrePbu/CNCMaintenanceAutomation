@@ -5,6 +5,9 @@
     ViewData["Title"] = "Index";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
+
+<partial name="_StatusMessage" model="Model.Message"/>
+
 <h2 class="text-info py-2">
     Customer Machine Register
 </h2>
@@ -130,34 +133,19 @@
                                 </td>
                             }
                             <td>
-                                <div class="btn-group" role="group">
-                                    <a class="btn btn-primary" asp-page="Edit" asp-route-Id="@item.Id">
-                                        <i class="fas fa-edit"></i>
-                                        &nbsp;
-                                        Edit Maintenance
-                                    </a>
-                                    <a class="btn btn-danger" asp-page="Delete" asp-route-Id="@item.Id">
-                                        <i class="fas fa-trash-alt"></i>
-                                        &nbsp;
-                                        Delete Maintenance
-                                    </a>
-                                </div>
-                            </td>
-                            @*<td>
-                                <a class="btn btn-success" asp-page="../Maintenances/Edit" asp-route-machineId="@item.Id">
+                                <a class="btn btn-primary" asp-page="Edit" asp-route-Id="@item.Id">
                                     <i class="fas fa-edit"></i>
                                     &nbsp;
-                                    Create Maintenance
+                                    Edit Maintenance
                                 </a>
                             </td>
-
                             <td>
-                                <a class="btn btn-success" asp-page="../Maintenances/Delete" asp-route-machineId="@item.Id">
-                                    <i class="fas fa-trash"></i>
+                                <a class="btn btn-danger" asp-page="Delete" asp-route-Id="@item.Id">
+                                    <i class="fas fa-trash-alt"></i>
                                     &nbsp;
-                                    Create Maintenance
+                                    Delete Maintenance
                                 </a>
-                            </td>*@
+                            </td>
                         </tr>		 
 	                }
                 </table>

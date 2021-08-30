@@ -18,6 +18,9 @@ namespace CNCMaintenanceAutomation.Pages.Machines
         [BindProperty]
         public UserMachineViewModel UserMachineViewModel { get; set;}
 
+        [TempData]
+        public string Message { get; set; }
+
         public IndexModel(ApplicationDbContext context)
         {
             _context = context;
