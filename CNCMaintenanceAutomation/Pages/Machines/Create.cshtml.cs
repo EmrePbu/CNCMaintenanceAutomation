@@ -48,7 +48,7 @@ namespace CNCMaintenanceAutomation.Pages.Machines
             _context.CncMachines.Add(CncMachine);
             await _context.SaveChangesAsync();
             Message = "Save Successful";
-            return RedirectToPage("Index", new { userId = CncMachine.OwnerId });
+            return RedirectToPage("Index", new { OwnerId = CncMachine.OwnerId });
         
         }
     }

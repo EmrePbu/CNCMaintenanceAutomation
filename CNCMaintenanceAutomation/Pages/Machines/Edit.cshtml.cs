@@ -39,7 +39,6 @@ namespace CNCMaintenanceAutomation.Pages.Machines
                 return NotFound();
             }
 
-
             return Page();
         }
 
@@ -51,7 +50,6 @@ namespace CNCMaintenanceAutomation.Pages.Machines
             }
             else
             {
-
                 // biz sadece fiyat bilgisini guncellemek istiyoruz. 
                 // fakat bu kod satiri veritabanina butun bilgileri tekrardan gonderiyor.
                 //_context.Attach(MaintenanceType).State = EntityState.Modified;
@@ -89,7 +87,7 @@ namespace CNCMaintenanceAutomation.Pages.Machines
 
                     await _context.SaveChangesAsync();
                     Message = "Edit Cnc Machine Successfully";
-                    return RedirectToPage("./Index", new { userId = CncMachine.OwnerId });
+                    return RedirectToPage("./Index", new { OwnerId = CncMachine.OwnerId });
                 }
             }
         }
