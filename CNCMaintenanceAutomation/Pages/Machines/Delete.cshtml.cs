@@ -32,7 +32,7 @@ namespace CNCMaintenanceAutomation.Pages.Machines
                 return NotFound();
 
             }
-            CncMachine = await _context.CncMachines.FirstOrDefaultAsync(a => a.Id == id);
+            CncMachine = await _context.CncMachines.Include(a => a.ApplicationUser).FirstOrDefaultAsync(a => a.Id == id);
 
             if (CncMachine == null)
             {
@@ -53,7 +53,7 @@ namespace CNCMaintenanceAutomation.Pages.Machines
             {
                 _context.CncMachines.Remove(CncMachine);
                 await _context.SaveChangesAsync();
-                
+
             }
             Message = "Delete Successfully";
             return RedirectToPage("./Index", new { OwnerId = CncMachine.OwnerId });
