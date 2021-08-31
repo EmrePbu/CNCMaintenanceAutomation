@@ -1,0 +1,120 @@
+﻿@page
+@model CNCMaintenanceAutomation.Pages.Machines.EditModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2 class="text-info">Edit Cnc Machine</h2>
+<br />
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <input hidden asp-for="CncMachine.OwnerId" />
+            <input hidden asp-for="CncMachine.Id" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @* Maintenance SerialNumber input *@
+            <div class="form-group">
+                <div>
+                    <label asp-for="CncMachine.SerialNumber"></label>
+                </div>
+                <div>
+                    <input asp-for="CncMachine.SerialNumber" class="form-control" />
+                </div>
+            </div>
+            <span asp-validation-for="CncMachine.SerialNumber" class="text-danger"></span>
+            @* Maintenance Brand input *@
+            <div class="form-group">
+                <div>
+                    <label asp-for="CncMachine.Brand"></label>
+                </div>
+                <div>
+                    <input asp-for="CncMachine.Brand" class="form-control" />
+                </div>
+            </div>
+            <span asp-validation-for="CncMachine.Brand" class="text-danger"></span>
+
+            @* Maintenance Model input *@
+            <div class="form-group">
+                <div>
+                    <label asp-for="CncMachine.Model"></label>
+                </div>
+                <div>
+                    <input asp-for="CncMachine.Model" class="form-control" />
+                </div>
+            </div>
+            <span asp-validation-for="CncMachine.Model" class="text-danger"></span>
+
+            @* Maintenance MachineType input *@
+            <div class="form-group">
+                <div>
+                    <label asp-for="CncMachine.MachineType"></label>
+                </div>
+                <div>
+                    <input asp-for="CncMachine.MachineType" class="form-control" />
+                </div>
+            </div>
+            <span asp-validation-for="CncMachine.MachineType" class="text-danger"></span>
+
+            @* Maintenance DateOfManufacture input *@
+            <div class="form-group">
+                <div>
+                    <label asp-for="CncMachine.DateOfManufacture"></label>
+                </div>
+                <div>
+                    <input asp-for="CncMachine.DateOfManufacture" class="form-control" />
+                </div>
+            </div>
+            <span asp-validation-for="CncMachine.DateOfManufacture" class="text-danger"></span>
+
+            @* Maintenance Operation Time input *@
+            <div class="form-group">
+                <div>
+                    <label asp-for="CncMachine.OperationTime"></label>
+                </div>
+                <div>
+                    <input asp-for="CncMachine.OperationTime" class="form-control" />
+                </div>
+            </div>
+            <span asp-validation-for="CncMachine.OperationTime" class="text-danger"></span>
+
+            @* Maintenance Description input *@
+            <div class="form-group">
+                <div>
+                    <label asp-for="CncMachine.Description"></label>
+                </div>
+                <div>
+                    <input asp-for="CncMachine.Description" class="form-control" />
+                </div>
+            </div>
+            <span asp-validation-for="CncMachine.Description" class="text-danger"></span>
+
+
+
+            <div class="form-group">
+                @*<input type="submit" value="Save" class="btn btn-primary" />*@
+                <div class="row">
+                    <div class="col-6">
+                        @*<i class="fas fa-plus"></i>&nbsp;*@
+                        <input type="submit" value="Save" class="btn btn-info form-control" />
+                    </div>
+                    <div class="col-6">
+                        <a asp-page="Index" asp-route-OwnerId="@Model.CncMachine.OwnerId" class="btn btn-success form-control"><i class="fas fa-arrow-left"></i>&nbsp; Back to</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@*<div>
+        <a asp-page="./Index">Back to List</a>
+    </div>*@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -51,7 +51,5 @@ namespace CNCMaintenanceAutomation.Pages.Machines
             return RedirectToPage("Index", new { userId = CncMachine.OwnerId });
         
         }
-
-
     }
 }
