@@ -17,5 +17,9 @@ namespace CNCMaintenanceAutomation.Data
         public DbSet<MaintenanceType> MaintenanceTypes { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<CncMachine> CncMachines { get; set; }
+        public DbSet<MaintenanceServiceCard> MaintenanceServiceCards { get; set; }
+        public DbSet<MaintenanceServiceGeneral> MaintenanceServiceGenerals { get; set; }
+        public DbSet<MaintenanceServiceDetail> MaintenanceServiceDetails { get; set; }
+
     }
 }
