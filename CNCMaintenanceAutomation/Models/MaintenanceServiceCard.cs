@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CNCMaintenanceAutomation.Models
 {
     public class MaintenanceServiceCard
-    {
+    {   
         public int Id { get; set; }
         public int MachineId { get; set; }
         public int MaintenanceTypeId { get; set; }
