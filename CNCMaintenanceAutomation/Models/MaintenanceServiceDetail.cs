@@ -13,7 +13,7 @@ namespace CNCMaintenanceAutomation.Models
 
         public int MaintenanceServiceGeneralId { get; set; }
 
-        [ForeignKey("MaintenanceServieGeneralId")]
+        [ForeignKey("MaintenanceServiceGeneralId")]
         public virtual MaintenanceServiceGeneral MaintenanceServiceGeneral { get; set; }
 
         [Display(Name ="Maintenance")]
