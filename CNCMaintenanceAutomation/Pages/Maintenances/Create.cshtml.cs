@@ -28,27 +28,27 @@ namespace CNCMaintenanceAutomation.Pages.Maintenances
         }
 
         // Pages/Machines/Index.cshtml - Line 128 - router name
-        public async Task<IActionResult> OnGetAsync(int? machineId)
+        public async Task<IActionResult> OnGetAsync(int? cncMachineId)
         {
-            if (machineId == null)
+            if (cncMachineId == null)
             {
                 return NotFound();
             }
 
             CncMachineMaintenanceServiceViewModel = new CncMachineMaintenanceServiceViewModel
             {
-                CncMachine = await _context.CncMachines.Include(a => a.ApplicationUser).FirstOrDefaultAsync(a => a.Id == machineId),
+                CncMachine = await _context.CncMachines.Include(a => a.ApplicationUser).FirstOrDefaultAsync(a => a.Id == cncMachineId),
                 MaintenanceServiceGeneral = new Models.MaintenanceServiceGeneral(),
             };
 
-            List<String> MaintenanceServiceCardList = _context.MaintenanceServiceCards.Include(a => a.MaintenanceType).Where(a => a.MachineId == machineId).Select(a => a.MaintenanceType.MaintenanceName).ToList();
+            List<String> MaintenanceServiceCardList = _context.MaintenanceServiceCards.Include(a => a.MaintenanceType).Where(a => a.CncMachineId == cncMachineId).Select(a => a.MaintenanceType.MaintenanceName).ToList();
 
             //C# 'de LINQ sorgularý yazma#
             IQueryable<MaintenanceType> MaintenanceTypesList = from x in _context.MaintenanceTypes where !(MaintenanceServiceCardList.Contains(x.MaintenanceName)) select x;
 
             CncMachineMaintenanceServiceViewModel.MaintenanceTypesList = MaintenanceTypesList.ToList();
 
-            CncMachineMaintenanceServiceViewModel.MaintenanceServiceCardsList = _context.MaintenanceServiceCards.Include(a => a.MaintenanceType).Where(a => a.MachineId == machineId).ToList();
+            CncMachineMaintenanceServiceViewModel.MaintenanceServiceCardsList = _context.MaintenanceServiceCards.Include(a => a.MaintenanceType).Where(a => a.CncMachineId == cncMachineId).ToList();
 
 
             CncMachineMaintenanceServiceViewModel.MaintenanceServiceGeneral.TotalPrice = 0;
@@ -57,6 +57,49 @@ namespace CNCMaintenanceAutomation.Pages.Maintenances
                 CncMachineMaintenanceServiceViewModel.MaintenanceServiceGeneral.TotalPrice += item.MaintenanceType.MaintenancePrice;
             }
 
+            return Page();
+        }
+
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            ///
+            if (!ModelState.IsValid)
+            {
+                CncMachineMaintenanceServiceViewModel.MaintenanceServiceGeneral.CreationDate = DateTime.Now;
+
+                CncMachineMaintenanceServiceViewModel.MaintenanceServiceCardsList = _context.MaintenanceServiceCards.Include(a => a.MaintenanceType).Where(a => a.CncMachineId == CncMachineMaintenanceServiceViewModel.CncMachine.Id).ToList();
+
+
+                foreach (var item in CncMachineMaintenanceServiceViewModel.MaintenanceServiceCardsList)
+                {
+                    CncMachineMaintenanceServiceViewModel.MaintenanceServiceGeneral.TotalPrice += item.MaintenanceType.MaintenancePrice;
+                }
+
+                CncMachineMaintenanceServiceViewModel.MaintenanceServiceGeneral.CncMachineId = CncMachineMaintenanceServiceViewModel.CncMachine.Id;
+
+                _context.MaintenanceServiceGenerals.Add(CncMachineMaintenanceServiceViewModel.MaintenanceServiceGeneral);
+                await _context.SaveChangesAsync();
+
+
+                foreach (var item in CncMachineMaintenanceServiceViewModel.MaintenanceServiceCardsList)
+                {
+                    MaintenanceServiceDetail maintenanceServiceDetail = new MaintenanceServiceDetail
+                    {
+                        MaintenanceServiceGeneralId = CncMachineMaintenanceServiceViewModel.MaintenanceServiceGeneral.Id,
+                        MaintenanceName = item.MaintenanceType.MaintenanceName,
+                        MaintenancePrice = item.MaintenanceType.MaintenancePrice,
+                        MaintenanceTypeId = item.MaintenanceTypeId,
+                    };
+                    _context.MaintenanceServiceDetails.Add(maintenanceServiceDetail);
+                }
+
+                _context.MaintenanceServiceCards.RemoveRange(CncMachineMaintenanceServiceViewModel.MaintenanceServiceCardsList);
+
+                await _context.SaveChangesAsync();
+
+                return RedirectToPage("../Machines/Index", new { ownerId = CncMachineMaintenanceServiceViewModel.CncMachine.OwnerId });
+            }
             return Page();
         }
     }

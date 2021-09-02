@@ -22,7 +22,7 @@ namespace CNCMaintenanceAutomation.Models
         [DisplayFormat(DataFormatString ="{0:dd/MMM/YYYY}")]
         public DateTime CreationDate { get; set; }
 
-        public int MachineId { get; set; }
+        public int CncMachineId { get; set; }
 
         [ForeignKey("MachineId")]
         public virtual CncMachine CncMachine { get; set; }

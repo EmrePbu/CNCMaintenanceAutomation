@@ -9,7 +9,7 @@ namespace CNCMaintenanceAutomation.Models
     public class MaintenanceServiceCard
     {   
         public int Id { get; set; }
-        public int MachineId { get; set; }
+        public int CncMachineId { get; set; }
         public int MaintenanceTypeId { get; set; }
 
         [ForeignKey("MachineId")]
