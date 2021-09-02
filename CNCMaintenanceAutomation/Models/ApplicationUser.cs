@@ -14,9 +14,13 @@ namespace CNCMaintenanceAutomation.Models
         /// add-migration AddAplicationUser
         /// update-database
         /// </summary>
+        [Display(Name = "Name, Last Name")]
         public string NameLastName { get; set; }
+        [Display(Name = "Address")]
         public string Address { get; set; }
+        [Display(Name = "City")]
         public string City { get; set; }
+        [Display(Name = "Zip Code")]
         public string ZipCode { get; set; }
 
 

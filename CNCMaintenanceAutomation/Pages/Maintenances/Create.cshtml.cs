@@ -38,7 +38,7 @@ namespace CNCMaintenanceAutomation.Pages.Maintenances
             CncMachineMaintenanceServiceViewModel = new CncMachineMaintenanceServiceViewModel
             {
                 CncMachine = await _context.CncMachines.Include(a => a.ApplicationUser).FirstOrDefaultAsync(a => a.Id == cncMachineId),
-                MaintenanceServiceGeneral = new Models.MaintenanceServiceGeneral(),
+                MaintenanceServiceGeneral = new MaintenanceServiceGeneral(),
             };
 
             List<String> MaintenanceServiceCardList = _context.MaintenanceServiceCards.Include(a => a.MaintenanceType).Where(a => a.CncMachineId == cncMachineId).Select(a => a.MaintenanceType.MaintenanceName).ToList();
@@ -101,6 +101,26 @@ namespace CNCMaintenanceAutomation.Pages.Maintenances
                 return RedirectToPage("../Machines/Index", new { ownerId = CncMachineMaintenanceServiceViewModel.CncMachine.OwnerId });
             }
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostAddCard()
+        {
+            MaintenanceServiceCard maintenanceServiceCard = new MaintenanceServiceCard()
+            {
+                CncMachineId = CncMachineMaintenanceServiceViewModel.CncMachine.Id,
+                MaintenanceTypeId = CncMachineMaintenanceServiceViewModel.MaintenanceServiceDetail.MaintenanceTypeId,
+            };
+            _context.MaintenanceServiceCards.Add(maintenanceServiceCard);
+            await _context.SaveChangesAsync();
+            return RedirectToPage("Create", new { cncMachineId = CncMachineMaintenanceServiceViewModel.CncMachine.Id });
+        }
+
+        public async Task<IActionResult> OnPostDeleteCard(int maintenanceTypeId)
+        {
+            MaintenanceServiceCard maintenanceServiceCard = _context.MaintenanceServiceCards.FirstOrDefault(a => a.CncMachineId == CncMachineMaintenanceServiceViewModel.CncMachine.Id && a.MaintenanceTypeId == maintenanceTypeId);
+            _context.MaintenanceServiceCards.Remove(maintenanceServiceCard);
+            await _context.SaveChangesAsync();
+            return RedirectToPage("Create", new { cncMachineId = CncMachineMaintenanceServiceViewModel.CncMachine.Id });
         }
     }
 }
