@@ -16,6 +16,7 @@
 
 <div class="container">
     <div class="card">
+        @* Header *@
         <div class="card-header ml-0 row container">
             @* Person *@
             <div class="col-5">
@@ -110,6 +111,53 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+
+        @* Basket *@
+        <div class="card-body">
+            <form method="post" style="width:100%;">
+                <div class="container">
+                    <input hidden asp-for="CncMachineMaintenanceServiceViewModel.CncMachine.Brand" />
+                    <input hidden asp-for="CncMachineMaintenanceServiceViewModel.CncMachine.Model" />
+                    <input hidden asp-for="CncMachineMaintenanceServiceViewModel.CncMachine.SerialNumber" />
+                    <input hidden asp-for="CncMachineMaintenanceServiceViewModel.CncMachine.OwnerId" />
+                    <input hidden asp-for="CncMachineMaintenanceServiceViewModel.CncMachine.Id" />
+
+                    <div class="border rounded p-2">
+                        <div class="row">
+                            <div class="col-3">
+                                <h4 class="text-info pl-3 pt-2 pb-1">Add Maintenance</h4>
+                            </div>
+                            <div class="col-9 pb-1 pt-2">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <select asp-for="CncMachineMaintenanceServiceViewModel.MaintenanceServiceDetail.MaintenanceTypeId" asp-items="@(new SelectList(Model.CncMachineMaintenanceServiceViewModel.MaintenanceTypesList, "Id","MaintenanceName"))" class="form-control">
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <button type="submit" asp-page-handler="OnPostAddCard" class="form-control btn btn-info">
+                                            <i class="fas fa-plus"></i>&nbsp;Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border container rounded p-2">
+                        <h3 class="text-info pb-2">Maintenance Summary Information</h3>
+                        @if (Model.CncMachineMaintenanceServiceViewModel.MaintenanceServiceCardsList.Count == 0)
+                        {
+                    <p>There is no added maintenance type.</p>
+                        }
+                        else
+                        {
+
+                        }
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

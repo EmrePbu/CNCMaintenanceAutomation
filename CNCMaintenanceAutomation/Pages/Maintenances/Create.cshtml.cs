@@ -59,8 +59,7 @@ namespace CNCMaintenanceAutomation.Pages.Maintenances
 
             return Page();
         }
-
-
+        
         public async Task<IActionResult> OnPostAsync()
         {
             ///
