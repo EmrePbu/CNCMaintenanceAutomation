@@ -20,11 +20,15 @@ namespace CNCMaintenanceAutomation.Pages.Maintenances
         }
 
         [BindProperty]
-        public List<MaintenanceServiceGeneral> MaintenanceServiceGenerals { get; set; }
+        public List<MaintenanceServiceGeneral> MaintenanceServiceGeneral { get; set; }
 
-        public async Task OnGetAsync(int? cncMachineId)
+        public string OwnerId { get; set; }
+
+        public async Task OnGet(int cncMachineId)
         {
-            MaintenanceServiceGenerals = await _context.MaintenanceServiceGenerals.Include(a => a.CncMachine).Include(a => a.CncMachine.ApplicationUser).Where(a => a.CncMachineId == cncMachineId).ToListAsync();
+            MaintenanceServiceGeneral = await _context.MaintenanceServiceGenerals.Include(a => a.CncMachine).Include(a => a.CncMachine.ApplicationUser).Where(a => a.CncMachineId == cncMachineId).ToListAsync();
+
+            OwnerId = _context.CncMachines.Where(a => a.Id == cncMachineId).ToList().FirstOrDefault().OwnerId;
         }
     }
 }
