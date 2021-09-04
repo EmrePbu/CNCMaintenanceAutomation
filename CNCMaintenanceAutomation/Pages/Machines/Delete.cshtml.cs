@@ -25,7 +25,7 @@ namespace CNCMaintenanceAutomation.Pages.Machines
         [TempData]
         public string Message { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int cncMachineId)
+        public async Task<IActionResult> OnGetAsync(int? cncMachineId)
         {
             if (cncMachineId == null)
             {

@@ -25,7 +25,7 @@ namespace CNCMaintenanceAutomation.Pages.Machines
             _context = context;
         }
 
-        public async Task<IActionResult> OnGetAsync(int cncMachineId)
+        public async Task<IActionResult> OnGetAsync(int? cncMachineId)
         {
             if (cncMachineId == null)
             {
