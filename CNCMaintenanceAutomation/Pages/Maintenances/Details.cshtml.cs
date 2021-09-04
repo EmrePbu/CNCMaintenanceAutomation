@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace CNCMaintenanceAutomation.Pages.Maintenances
-{
+{ 
     public class DetailsModel : PageModel
     {
         private readonly ApplicationDbContext _context;
