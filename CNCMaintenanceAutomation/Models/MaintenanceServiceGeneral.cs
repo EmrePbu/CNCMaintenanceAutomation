@@ -24,7 +24,8 @@ namespace CNCMaintenanceAutomation.Models
 
         public int CncMachineId { get; set; }
 
-        [ForeignKey("MachineId")]
+        //Burada ki key onceden MachineId idi
+        [ForeignKey("CncMachineId")]
         public virtual CncMachine CncMachine { get; set; }
 
     }
