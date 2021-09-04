@@ -118,53 +118,50 @@ else
                     </table>
                 </div>
             </div>
-        </div>
-
-        <div class="card-body">
-            <table class="table table-striped border">
-                <tr class="table-secondary">
-                    <th>
-                        @Html.DisplayNameFor(a => Model.MaintenanceServiceGeneral[0].MachineOperationTime)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(a => Model.MaintenanceServiceGeneral[0].TotalPrice)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(a => Model.MaintenanceServiceGeneral[0].Details)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(a => Model.MaintenanceServiceGeneral[0].CreationDate)
-                    </th>
-                    <th></th>
-                </tr>
-
-                @foreach (var item in Model.MaintenanceServiceGeneral)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(a => item.MachineOperationTime)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(a => item.TotalPrice)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(a => item.Details)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(a => item.CreationDate)
-                        </td>
-                        <td>
-                            <a asp-page="Details" class="btn btn-info form-control" asp-route-maintenanceId="@item.Id">
-                                <i class="fas fa-info-circle"></i>
-                                &nbsp;Details
-                            </a>
-                        </td>
+            <div class="card-body">
+                <table class="table table-striped border" >
+                    <tr class="table-secondary">
+                        <th>
+                            @Html.DisplayNameFor(a => Model.MaintenanceServiceGeneral[0].MachineOperationTime)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(a => Model.MaintenanceServiceGeneral[0].TotalPrice)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(a => Model.MaintenanceServiceGeneral[0].Details)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(a => Model.MaintenanceServiceGeneral[0].CreationDate)
+                        </th>
+                        <th></th>
                     </tr>
-                }
 
-            </table>
+                    @foreach (var item in Model.MaintenanceServiceGeneral)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(a => item.MachineOperationTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(a => item.TotalPrice)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(a => item.Details)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(a => item.CreationDate)
+                            </td>
+                            <td>
+                                <a asp-page="Details" class="btn btn-info form-control" asp-route-maintenanceId="@item.Id">
+                                    <i class="fas fa-info-circle"></i>
+                                    &nbsp;Details
+                                </a>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
         </div>
-
-
     </div>
 }

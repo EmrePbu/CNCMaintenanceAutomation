@@ -16,14 +16,16 @@ namespace CNCMaintenanceAutomation.Models
         [ForeignKey("MaintenanceServiceGeneralId")]
         public virtual MaintenanceServiceGeneral MaintenanceServiceGeneral { get; set; }
 
-        [Display(Name ="Maintenance")]
+        [Display(Name = "Maintenance Type Id")]
         public int MaintenanceTypeId { get; set; }
 
         [ForeignKey("MaintenanceId")]
+        [Display(Name = "Maintenance Type")]
         public virtual MaintenanceType MaintenanceType { get; set; }
-    
+
+        [Display(Name = "Maintenance Price")]
         public double MaintenancePrice { get; set; }
-    
+        [Display(Name = "Maintenance Name")]
         public string MaintenanceName { get; set; }
     }
 }
