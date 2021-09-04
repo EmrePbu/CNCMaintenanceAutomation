@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using CNCMaintenanceAutomation.Data;
 using CNCMaintenanceAutomation.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace CNCMaintenanceAutomation.Pages.Maintenances
 {
+    [Authorize]
     public class HistoryModel : PageModel
     {
         private readonly ApplicationDbContext _context;

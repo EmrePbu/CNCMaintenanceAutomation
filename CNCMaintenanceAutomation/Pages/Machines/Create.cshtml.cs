@@ -5,11 +5,13 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using CNCMaintenanceAutomation.Data;
 using CNCMaintenanceAutomation.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CNCMaintenanceAutomation.Pages.Machines
 {
+    [Authorize]
     public class CreateModel : PageModel
     {
         private readonly ApplicationDbContext _context;

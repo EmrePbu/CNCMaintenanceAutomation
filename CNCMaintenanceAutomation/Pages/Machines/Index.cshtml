@@ -6,7 +6,7 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<partial name="_StatusMessage" model="Model.Message"/>
+<partial name="_StatusMessage" model="Model.Message" />
 
 <h2 class="text-info py-2">
     Customer Machine Register
@@ -22,18 +22,18 @@
             <div class="col-6 text-right">
                 @if (User.IsInRole(StaticValues.AdminUser))
                 {
-                    <a asp-page="/Users/Index" class="btn btn-info btn-sm"><i class="fas fa-arrow-left"></i>&nbsp;List on Users</a>
+                    <a asp-page="/Users/Index" class="btn btn-info btn-sm"><i class="fas fa-arrow-left"></i>List on Users</a>
                 }
             </div>
         </div>
-        
+
         <div class="card-body">
             <div class="row" style="padding: 20px 0 40px 0;">
                 <div class="col-md-3">
                     <p>
                         <a asp-page="Create" asp-route-userId="@Model.UserMachineViewModel.ApplicationUser.Id" class="btn btn-info form-control">
                             <i class="fas fa-plus"></i>
-                            &nbsp; Add Machine
+                            Add Machine
                         </a>
                     </p>
                 </div>
@@ -91,15 +91,25 @@
                             @Html.DisplayNameFor(a => a.UserMachineViewModel.Machines.FirstOrDefault().MachineType)
                         </th>
 
+                        <th>
+                            History Maintenance
+                        </th>
                         @if (User.IsInRole(StaticValues.AdminUser))
                         {
-                            <th></th>
+                            <th>
+                                Create Maintenance
+                            </th>
                         }
-                        <th></th>
+                        <th>
+                            Edit Maintenance
+                        </th>
+                        <th>
+                            Delete Maintenance
+                        </th>
                     </tr>
 
                     @foreach (var item in Model.UserMachineViewModel.Machines)
-	                {
+                    {
                         <tr>
                             <td>
                                 @Html.DisplayFor(a => item.SerialNumber)
@@ -116,9 +126,10 @@
 
                             <td>
                                 <a class="btn btn-secondary" asp-page="../Maintenances/History" asp-route-cncMachineId="@item.Id">
-                                    <i class="fas fa-wrench"></i>
-                                    &nbsp;
-                                    History Maintenance
+
+                                    <i class="fas fa-wrench p-2"></i>
+
+                                    @*History Maintenance*@
                                 </a>
                             </td>
 
@@ -126,28 +137,25 @@
                             {
                                 <td>
                                     <a class="btn btn-success" asp-page="../Maintenances/Create" asp-route-cncMachineId="@item.Id">
-                                        <i class="fas fa-plus"></i>
-                                        &nbsp;
-                                        Create Maintenance
+                                        <i class="fas fa-plus p-2"></i>
+                                        @*Create Maintenance*@
                                     </a>
                                 </td>
                             }
                             <td>
                                 <a class="btn btn-primary" asp-page="Edit" asp-route-cncMachineId="@item.Id">
-                                    <i class="fas fa-edit"></i>
-                                    &nbsp;
-                                    Edit Maintenance
+                                    <i class="fas fa-edit p-2"></i>
+                                    @*Edit Maintenance*@
                                 </a>
                             </td>
                             <td>
                                 <a class="btn btn-danger" asp-page="Delete" asp-route-cncMachineId="@item.Id">
-                                    <i class="fas fa-trash-alt"></i>
-                                    &nbsp;
-                                    Delete Maintenance
+                                    <i class="fas fa-trash-alt p-2"></i>
+                                    @*Delete Maintenance*@
                                 </a>
                             </td>
-                        </tr>		 
-	                }
+                        </tr>
+                    }
                 </table>
             }
         </div>

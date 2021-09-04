@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using CNCMaintenanceAutomation.Data;
 using CNCMaintenanceAutomation.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace CNCMaintenanceAutomation.Pages.Machines
 {
+    [Authorize]
     public class DeleteModel : PageModel
     {
         private readonly ApplicationDbContext _context;
@@ -41,13 +43,13 @@ namespace CNCMaintenanceAutomation.Pages.Machines
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(int? cncMachineId)
         {
-            if (id == null)
+            if (cncMachineId == null)
             {
                 return NotFound();
             }
-            CncMachine = await _context.CncMachines.FindAsync(id);
+            CncMachine = await _context.CncMachines.FindAsync(cncMachineId);
 
             if (CncMachine != null)
             {

@@ -5,12 +5,14 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using CNCMaintenanceAutomation.Data;
 using CNCMaintenanceAutomation.Models.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace CNCMaintenanceAutomation.Pages.Machines
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly ApplicationDbContext _context;
