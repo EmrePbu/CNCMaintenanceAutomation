@@ -25,14 +25,14 @@ namespace CNCMaintenanceAutomation.Pages.Machines
         [TempData]
         public string Message { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int cncMachineId)
         {
-            if (id == null)
+            if (cncMachineId == null)
             {
                 return NotFound();
 
             }
-            CncMachine = await _context.CncMachines.Include(a => a.ApplicationUser).FirstOrDefaultAsync(a => a.Id == id);
+            CncMachine = await _context.CncMachines.Include(a => a.ApplicationUser).FirstOrDefaultAsync(a => a.Id == cncMachineId);
 
             if (CncMachine == null)
             {

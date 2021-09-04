@@ -136,7 +136,9 @@
                                     </div>
 
                                     <div class="col-4">
-                                        <button type="submit" asp-page-handler="OnPostAddCard" class="form-control btn btn-info">
+                                        @* asp-page-handler= "OnPostAddCard"
+                                            OnPost default bir isimlendirme oldugu icin arkaplanda isimler ustuste biniyor.*@
+                                        <button type="submit" asp-page-handler="AddCard" class="form-control btn btn-info">
                                             <i class="fas fa-plus"></i>&nbsp;Add
                                         </button>
                                     </div>
@@ -175,9 +177,11 @@
                                                     @Html.DisplayFor(a => item.MaintenanceType.MaintenancePrice)
                                                 </td>
                                                 <td>
+                                                    @* asp-page-handler="OnPostDeleteCard"
+                                                        OnPost default bir isimlendirme oldugu icin arkaplanda isimler ustuste biniyor.*@
                                                     <button type="submit"
                                                             class="btn btn-danger form-control"
-                                                            asp-page-handler="OnPostDeleteCard"
+                                                            asp-page-handler="DeleteCard"
                                                             asp-route-maintenanceTypeId="@item.MaintenanceTypeId">
 
                                                         <i class="fas fa-times"></i>
@@ -186,8 +190,7 @@
                                                 </td>
                                             </tr>
                                         }
-
-                                        <tr style="background-color:#00ff90">
+                                        <tr style="background-color:#87cdff">
                                             <td colspan="1">
                                                 <h6 class="text-success">Total Price:</h6>
                                             </td>
@@ -200,28 +203,31 @@
                                         </tr>
                                     </table>
                                 </div>
-                                <div class="col-5 px-4 pb-2">
-                                    <div class="col-3">
-                                        <label class="form-control" style="border: none;" asp-for="CncMachineMaintenanceServiceViewModel.MaintenanceServiceGeneral.MachineOperationTime">
-                                        </label>
+                                <div class="row col-5 px-4 pb-2">
+                                    <div class="row ">
+                                        <div class="col-4">
+                                            Operation Time: 
+                                            @*<label class="form-control" style="border: none;" asp-for="CncMachineMaintenanceServiceViewModel.MaintenanceServiceGeneral.MachineOperationTime">
+                                            </label>*@
+                                        </div>
+                                        <div class="col-9">
+                                            <input asp-for="CncMachineMaintenanceServiceViewModel.MaintenanceServiceGeneral.MachineOperationTime" id="txtMachineOperationTime" class="form-control" />
+                                        </div>
                                     </div>
-                                    <div class="col-9">
-                                        <input asp-for="CncMachineMaintenanceServiceViewModel.MaintenanceServiceGeneral.MachineOperationTime" id="txtMachineOperationTime" class="form-control" />
-                                    </div>
-                                </div>
 
-                                <div class="row py-2">
-                                    <div class="col-12">
-                                        <textarea placeholder="Add descriptions..." asp-for="CncMachineMaintenanceServiceViewModel.MaintenanceServiceGeneral.Details" class="form-control" style="height:100px;">
+                                    <div class="row py-2">
+                                        <div class="col-12">
+                                            <textarea placeholder="Add descriptions..." asp-for="CncMachineMaintenanceServiceViewModel.MaintenanceServiceGeneral.Details" class="form-control" style="height:150px; width:400px;">
                                         </textarea>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row p-0">
-                                    <div class="col-12">
-                                        <button class="btn btn-success form-control" onclick="return validateInput()">
-                                            <i class="fas fa-check"></i>
-                                            &nbsp;Maintenance Completed
-                                        </button>
+                                    <div class="row p-0">
+                                        <div class="col-12">
+                                            <button class="btn btn-success form-control" onclick="return validateInput()">
+                                                <i class="fas fa-check"></i>
+                                                &nbsp;Maintenance Completed
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
