@@ -185,7 +185,6 @@
                                                             asp-route-maintenanceTypeId="@item.MaintenanceTypeId">
 
                                                         <i class="fas fa-times"></i>
-                                                        &nbsp;Delete
                                                     </button>
                                                 </td>
                                             </tr>
@@ -206,9 +205,9 @@
                                 <div class="row col-5 px-4 pb-2">
                                     <div class="row ">
                                         <div class="col-4">
-                                            Operation Time: 
+                                            Operation Time:
                                             @*<label class="form-control" style="border: none;" asp-for="CncMachineMaintenanceServiceViewModel.MaintenanceServiceGeneral.MachineOperationTime">
-                                            </label>*@
+                                                </label>*@
                                         </div>
                                         <div class="col-9">
                                             <input asp-for="CncMachineMaintenanceServiceViewModel.MaintenanceServiceGeneral.MachineOperationTime" id="txtMachineOperationTime" class="form-control" />
@@ -238,3 +237,21 @@
         </div>
     </div>
 </div>
+
+
+@* Swwet Alert *@
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        function validateInput() {
+            var operationTime = document.getElementById('txtMachineOperationTime').value
+            if (operationTime < 1) {
+                swal('Waring', 'Cnc Machine Operation time not null!', 'error')
+                return false
+            }
+        }
+    </script>
+
+
+}
