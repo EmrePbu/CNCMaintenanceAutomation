@@ -11,6 +11,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CNCMaintenanceAutomation.Pages.Machines
 {
+    /// <summary>
+    /// Musteri ve Yoneticilerin Cnc Makine tanimlamalarini saglayan CreateModel.
+    /// AspNetCore.MvcRazorPage objesinden miras alinarak olusturulmustur.
+    /// Ayrica Authorize degiskeni ile yetkilendirilme yapilarak sadece sisteme uye olan kisilerin bu Model e erisimi saglanmistir.
+    /// </summary>
     [Authorize]
     public class CreateModel : PageModel
     {
