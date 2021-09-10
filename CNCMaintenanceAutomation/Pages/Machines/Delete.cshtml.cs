@@ -11,6 +11,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CNCMaintenanceAutomation.Pages.Machines
 {
+    /// <summary>
+    /// Cnc Makinelerini silme islemini yapan PageModel
+    /// Ayrica Authorize degiskeni ile yetkilendirilme yapilarak sadece sisteme uye olan kisilerin bu Model e erisimi saglanmistir.
+    /// </summary>
     [Authorize]
     public class DeleteModel : PageModel
     {

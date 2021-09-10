@@ -11,6 +11,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CNCMaintenanceAutomation.Pages.Maintenances
 {
+    /// <summary>
+    /// Bu PageModel Cnc Makine icin detay bilgileri gosterir.
+    /// Ayrica Authorize degiskeni ile yetkilendirilme yapilarak sadece sisteme uye olan kisilerin bu Model e erisimi saglanmistir.
+    /// </summary>
     [Authorize]
     public class DetailsModel : PageModel
     {

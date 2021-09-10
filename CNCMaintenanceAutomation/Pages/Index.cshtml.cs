@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace CNCMaintenanceAutomation.Pages
 {
+    /// <summary>
+    /// Ana Sayfa Model'i
+    /// </summary>
     public class IndexModel : PageModel
     {
         // Default code

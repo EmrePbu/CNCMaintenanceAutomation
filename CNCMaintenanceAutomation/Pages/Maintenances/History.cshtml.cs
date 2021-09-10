@@ -11,6 +11,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CNCMaintenanceAutomation.Pages.Maintenances
 {
+    /// <summary>
+    /// Bu PageModel Cnc Makine icin gecmis bakim bilgilerini gosterir.
+    /// Ayrica Authorize degiskeni ile yetkilendirilme yapilarak sadece sisteme uye olan kisilerin bu Model e erisimi saglanmistir.
+    /// </summary>
     [Authorize]
     public class HistoryModel : PageModel
     {

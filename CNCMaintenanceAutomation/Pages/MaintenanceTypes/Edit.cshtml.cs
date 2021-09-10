@@ -13,6 +13,10 @@ using CNCMaintenanceAutomation.Utility;
 
 namespace CNCMaintenanceAutomation.Pages.MaintenanceTypes
 {
+    /// <summary>
+    /// Bu PageModel Bakimlari duzenleme islemini yapar.
+    /// Ayrica Authorize degiskeni ile yetkilendirilme yapilarak sadece YONETICI olan kisilerin bu Model e erisimi saglanmistir.
+    /// </summary>
     [Authorize(Roles = StaticValues.AdminUser)]
     public class EditModel : PageModel
     {

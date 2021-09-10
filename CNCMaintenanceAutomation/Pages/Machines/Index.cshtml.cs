@@ -12,6 +12,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CNCMaintenanceAutomation.Pages.Machines
 {
+    /// <summary>
+    /// Bu PageModel musteri ve yoneticilere ait olan makineleri listeler.
+    /// Ayrica Authorize degiskeni ile yetkilendirilme yapilarak sadece sisteme uye olan kisilerin bu Model e erisimi saglanmistir.
+    /// </summary>
     [Authorize]
     public class IndexModel : PageModel
     {
@@ -20,6 +24,9 @@ namespace CNCMaintenanceAutomation.Pages.Machines
         [BindProperty]
         public UserMachineViewModel UserMachineViewModel { get; set;}
 
+        /// <summary>
+        /// TempData PageModel 'ler arasinda veri iletilmesini saglar. Orn. Mesaj
+        /// </summary>
         [TempData]
         public string Message { get; set; }
 

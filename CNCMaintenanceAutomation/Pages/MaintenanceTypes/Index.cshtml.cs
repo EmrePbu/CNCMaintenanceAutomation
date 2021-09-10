@@ -12,6 +12,10 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CNCMaintenanceAutomation.Pages.MaintenanceTypes
 {
+    /// <summary>
+    /// Bu PageModel Bakim ekraninin Index Modeli bu model uzerinden Ekleme Silme Duzenleme  ve Goruntuleme islemi yapilir.
+    /// Ayrica Authorize degiskeni ile yetkilendirilme yapilarak sadece YONETICI olan kisilerin bu Model e erisimi saglanmistir.
+    /// </summary>
     [Authorize(Roles = StaticValues.AdminUser)]
     public class IndexModel : PageModel
     {
